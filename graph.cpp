@@ -13,6 +13,10 @@ void Node::add_neighbor(NodeId const id)
 {
    _neighbors.push_back(id);
 }
+void Node::delete_neighbor()
+{
+   _neighbors.pop_back();
+}
 
 /////////////////////////////////////////////
 //! \c Graph definitions
@@ -43,7 +47,15 @@ void Graph::add_edge(NodeId node1_id, NodeId node2_id)
 
    ++_num_edges;
 }
-
+void Graph::delete_edge(NodeId a, NodeId b)
+{
+	Node & node1 = _nodes.at(a);
+    node1.delete_neighbor();
+	Node & node2 = _nodes.at(b);
+	node2.delete_neighbor();
+	--_num_edges;
+	
+}
 std::ostream & operator<<(std::ostream & str, Graph const & graph)
 {
    str << "c This encodes a graph in DIMACS format\n"
@@ -93,3 +105,4 @@ DimacsId to_dimacs_id(NodeId const node_id)
 }
 
 } // namespace ED
+

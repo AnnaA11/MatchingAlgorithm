@@ -70,6 +70,7 @@ private:
       @warning Does not check whether @c id is the identity of the node itself (which would create a loop!).
    **/
    void add_neighbor(NodeId const id);
+   void delete_neighbor();
 
    std::vector<NodeId> _neighbors;
 }; // class Node
@@ -120,6 +121,7 @@ public:
       @warning Does not check that the edge does not already exist, so this class can be used to model non-simple graphs.
    **/
    void add_edge(NodeId node1_id, NodeId node2_id);
+   void delete_edge(NodeId a, NodeId b);
 
    /**
      @brief Prints the graph to the given ostream in DIMACS format.

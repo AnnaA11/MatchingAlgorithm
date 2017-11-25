@@ -104,6 +104,7 @@ std::pair<int, ED::Graph> read_graph(std::string filename)
 }//end of namespace ED
 
 //ToDo: To be removed
+/*
 int main(int argc, char* argv[])
 {
 	if (argc == 2){
@@ -119,3 +120,4 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 }
+*/

@@ -74,7 +74,7 @@ Checks if index i is in {0, ..., n-1}, throws std::out_of_range otherwise
 Returns the root of the partition class
 */
 int UnionFind::find(unsigned int i){
-	if (i >= _size || i < 0){
+	if (i >= _size){
 		throw std::out_of_range("UnionFind::find");
 	}
 	int current = i;
@@ -129,4 +129,3 @@ void UnionFind::unite(int i, int j){
 }
 }//namespace UF
 
-//ToDo: To be removed

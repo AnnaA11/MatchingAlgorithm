@@ -20,13 +20,19 @@ public:
 	UnionFind(std::size_t size);
 
 	//Find the representative (root) of i's partition class
-	int find(int i);
+	int find(unsigned int i);
 
 	//Compare if i and j belong to the same partition class
 	bool equals(int i, int j);
 
 	//Unite the partition classes of i and j
 	void unite(int i, int j);
+	
+	int position_in_tree(int i);
+	
+	void change_position_even(int i);
+	
+	void change_position_odd(int i);
 
 private:
 	//Internally save the partition classes as trees in forest
@@ -47,12 +53,11 @@ Upon initalization, each number is it's own partition class, meaning each number
 All ranks are zero
 */
 UnionFind::UnionFind(std::size_t size)
-	: _forest(),
+	: _forest(size),
 	_ranks(size, 0),
 	_size(size)
 	{
-		_forest.reserve(size);
-		for (int i = 0; i<size; i++){
+		for (unsigned int i = 0; i<size; i++){
 			_forest.at(i).push_back(i);
 			_forest.at(i).push_back(0);
 		}
@@ -64,12 +69,12 @@ Find the root of the partition class to which number i belongs
 Checks if index i is in {0, ..., n-1}, throws std::out_of_range otherwise
 Returns the root of the partition class
 */
-int UnionFind::find(int i){
+int UnionFind::find(unsigned int i){
 	if (i >= _size || i < 0){
 		throw std::out_of_range("UnionFind::find");
 	}
-	int & current = i;
-	int & parent = _forest.at(i).at(0);
+	int current = i;
+	int parent = _forest.at(i).at(0);
 	while (parent != current){
 		current = parent;
 		parent = _forest.at(current).at(0);

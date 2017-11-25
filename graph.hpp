@@ -70,7 +70,7 @@ private:
       @warning Does not check whether @c id is the identity of the node itself (which would create a loop!).
    **/
    void add_neighbor(NodeId const id);
-   void delete_neighbor();
+   void delete_neighbor(NodeId const id);
 
    std::vector<NodeId> _neighbors;
 }; // class Node

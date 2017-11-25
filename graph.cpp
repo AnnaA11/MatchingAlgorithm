@@ -13,9 +13,15 @@ void Node::add_neighbor(NodeId const id)
 {
    _neighbors.push_back(id);
 }
-void Node::delete_neighbor()
-{
-   _neighbors.pop_back();
+void Node::delete_neighbor(NodeId const id)
+{	
+	for(unsigned int i=0; i<_neighbors.size();i++) {
+		if(_neighbors.at(i)==id){
+			_neighbors.erase(_neighbors.begin()+i);
+			return;
+		}
+	}
+	throw std::runtime_error("Neighbor not found");
 }
 
 /////////////////////////////////////////////
@@ -47,12 +53,16 @@ void Graph::add_edge(NodeId node1_id, NodeId node2_id)
 
    ++_num_edges;
 }
-void Graph::delete_edge(NodeId a, NodeId b)
-{
-	Node & node1 = _nodes.at(a);
-    node1.delete_neighbor();
-	Node & node2 = _nodes.at(b);
-	node2.delete_neighbor();
+void Graph::delete_edge(NodeId node1_id, NodeId node2_id)
+{	
+	auto impl = [this](NodeId a, NodeId b)
+   {
+      Node & node = _nodes.at(a);
+      node.delete_neighbor(b);
+   };
+	
+   impl(node1_id, node2_id);
+   impl(node2_id, node1_id);
 	--_num_edges;
 	
 }
@@ -105,4 +115,3 @@ DimacsId to_dimacs_id(NodeId const node_id)
 }
 
 } // namespace ED
-

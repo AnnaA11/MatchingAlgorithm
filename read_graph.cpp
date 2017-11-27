@@ -1,3 +1,5 @@
+#include "read_graph.hpp"
+
 //Streams for input/output
 #include <fstream>
 #include <sstream>
@@ -9,7 +11,6 @@
 #include <tuple> //std::tie
 
 //Graph class
-#include "graph.cpp"
 #include "graph.hpp"
 
 namespace ED
